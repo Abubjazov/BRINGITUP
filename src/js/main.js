@@ -1,4 +1,3 @@
-  
 import Slider from './modules/slider';
 
 window.addEventListener('DOMContentLoaded', () => {
