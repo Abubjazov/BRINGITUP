@@ -1,6 +1,6 @@
 export default class Slider {
     constructor({
-        container = null, 
+        container = null,
         btns= null, 
         next = null, 
         prev = null,

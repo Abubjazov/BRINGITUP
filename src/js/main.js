@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     const modulesSlider = new MiniSlider({
-        container: '.modules__content-slider', 
+        container: '.modules__content-slider',
         prev: '.modules__info-btns .slick-prev', 
         next: '.modules__info-btns .slick-next',
         activeClass: 'card-active',
@@ -23,10 +23,10 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     const feedSlider = new MiniSlider({
-        container: '.feed__slider', 
+        container: '.feed__slider',
         prev: '.feed__slider .slick-prev', 
         next: '.feed__slider .slick-next',
-        activeClass: 'feed__item-active'
+        activeClass: 'feed__item-active',
     });
 
     showUpSlider.init();

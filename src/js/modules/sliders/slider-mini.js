@@ -9,20 +9,11 @@ export default class MiniSlider extends Slider {
 
         for (let i = 0; i < this.slides.length; i++) {
             this.slides[i].classList.remove(this.activeClass);
-
             if (this.animate) {
-                    this.slides[i].querySelector('.card__title').style.opacity = '0.4';
-                    this.slides[i].querySelector('.card__controls-arrow').style.opacity = '0';
+                this.slides[i].querySelector('.card__title').style.opacity = '0.4';
+                this.slides[i].querySelector('.card__controls-arrow').style.opacity = '0';
             }
         }
-
-        // this.slides.forEach(slide => {
-        //     slide.classList.remove(this.activeClass);
-        //     if (this.animate) {
-        //         this.slides[0].querySelector('.card__title').style.opacity = '0.4';
-        //         this.slides[0].querySelector('.card__controls-arrow').style.opacity = '0';
-        //     }
-        // });
 
         this.slides[0].classList.add(this.activeClass);
 
@@ -32,28 +23,36 @@ export default class MiniSlider extends Slider {
         }
     }
 
-    bindTriggers() {
-        this.next.addEventListener('click', () => {
-            this.container.appendChild(this.slides[0]);
-            this.decorizeSlides();
-        });
+    nextSlide() {
+        this.container.appendChild(this.slides[0]);
+        this.decorizeSlides();
+    }
 
-        this.prev.addEventListener('click', () => {
-            let active = this.slides[this.slides.length - 1];
-            this.container.insertBefore(active, this.slides[0]);
-            this.decorizeSlides();
-        });
+    prevSlide() {
+        let active = this.slides[this.slides.length - 1];
+        this.container.insertBefore(active, this.slides[0]);
+        this.decorizeSlides();
+    }
+
+    bindTriggers() {
+        this.next.addEventListener('click', () => this.nextSlide());
+
+        this.prev.addEventListener('click', () => this.prevSlide());
     }
 
     init() {
         this.container.style.cssText = `
-            display: flex;
-            flex-wrap: wrap;
-            overflow: hidden;
-            align-items: flex-start;
-        `;
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        align-items: flex-start;
+    `;
 
         this.bindTriggers();
         this.decorizeSlides();
-    }
+
+        if (this.autoplay) {
+            setInterval(() => this.nextSlide(), 3000);
+        }
+    }        
 }
