@@ -8,42 +8,25 @@ export default class Difference {
         this.oldCounter = 0;
         this.newCounter = 0;
     }
-    
 
-    bindTriggers() {
-        this.oldOfficer.querySelector('.plus').addEventListener('click', () => {
-            if ( this.oldCounter !== this.oldItems.length - 2) {
-                this.oldItems[this.oldCounter].classList.add('animated', 'fadeIn');
-                this.oldItems[this.oldCounter].style.display = 'flex';
-                this.oldCounter++;
-            } else {
-                this.oldItems[this.oldCounter].classList.add('animated', 'fadeIn');
-                this.oldItems[this.oldCounter].style.display = 'flex';              
-                this.oldItems[this.oldCounter + 1].remove();
-            }
-        });
 
-        this.newOfficer.querySelector('.plus').addEventListener('click', () => {
-            if ( this.newCounter !== this.newItems.length - 2) {
-                this.newItems[this.newCounter].classList.add('animated', 'fadeIn');
-                this.newItems[this.newCounter].style.display = 'flex';
-                this.newCounter++;
+
+    bindTrigger(officer, counter, items) {
+        officer.querySelector('.plus').addEventListener('click', () => {
+            if ( counter !== items.length - 2) {
+                items[counter].classList.add('animated', 'fadeIn');
+                items[counter].style.display = 'flex';
+                counter++;
             } else {
-                this.newItems[this.oldCounter].classList.add('animated', 'fadeIn');
-                this.newItems[this.oldCounter].style.display = 'flex';
-                this.newItems[this.newCounter + 1].remove();
+                items[counter].classList.add('animated', 'fadeIn');
+                items[counter].style.display = 'flex';              
+                items[counter + 1].remove();
             }
         });
     }
 
-    hideItems() {
-        this.oldItems.forEach((item, i, arr) => {
-            if (i !== arr.length - 1) {
-                item.style.display = 'none';
-            }
-        });
-
-        this.newItems.forEach((item, i, arr) => {
+    hideItems(items) {
+        items.forEach((item, i, arr) => {
             if (i !== arr.length - 1) {
                 item.style.display = 'none';
             }
@@ -51,7 +34,9 @@ export default class Difference {
     }
 
     init() {
-        this.hideItems();
-        this.bindTriggers();
+        this.hideItems(this.oldItems);
+        this.hideItems(this.newItems);
+        this.bindTrigger(this.oldOfficer, this.oldCounter, this.oldItems);
+        this.bindTrigger(this.newOfficer, this.newCounter, this.newItems);
     }
 }
