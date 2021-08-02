@@ -33,15 +33,14 @@ window.addEventListener('DOMContentLoaded', () => {
         feed: 'true'
     });
 
-    const player = new VideoPlayer('.showup .play', '.overlay');
-
     slider.render();
     modulesPageSlider.render();
     showUpSlider.init();
     modulesSlider.init();
-    feedSlider.init();    
-    player.init();
+    feedSlider.init();
 
+    new VideoPlayer('.showup .play', '.overlay').init();
+    new VideoPlayer('.module__video-item .play', '.overlay').init();
     new Difference('.officerold', '.officernew', '.officer__card-item').init();
     new Form('.form').init();
 });
